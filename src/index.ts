@@ -1,34 +1,54 @@
-import express, {Express, Request, Response} from "express";
-import dotenv from "dotenv";
+// src/routes/index.ts
+import { Express } from "express";
+import auth from "../middlewares/auth";
+import { SuperAdminController } from "../controllers/superadmin.controller";
+import { AdminCRMController } from "../controllers/admin.controller";
+import { CRMController } from "../controllers/crm.controller";
+import { UserService } from "../services/user.service";
+import { AuditLogService } from "../services/audit.service";
+import { SettingsService } from "../services/settings.service";
+import { EventService } from "../services/event.service";
 
-import routes from './routes/index'
-import { db } from './config/db';
-import e from "express";
-const app = express();
-dotenv.config();
-const port = process.env.PORT || 3000;
-//RECIBIR BODY
-app.use(express.json());
-app.use(express.urlencoded({extended:true}));
+export default function setupRoutes(app: Express) {
+    const userService = new UserService();
+    const auditLogService = new AuditLogService();
+    const settingsService = new SettingsService();
+    const eventService = new EventService();
 
-app.get('/', (req: Request ,res : Response)=>{
-    res.send('Hello World');
-});
+    const superAdminController = new SuperAdminController(userService, auditLogService, settingsService);
+    const adminCRMController = new AdminCRMController(eventService, userService);
+    const crmController = new CRMController(eventService);
 
-app.get('/about', (req: Request ,res : Response)=>{
-    res.send('About us');
-});
+    // Super Admin routes
+    app.post('/super-admin/users', superAdminController.createUser);
+    app.put('/super-admin/users/:id', superAdminController.updateUser);
+    app.delete('/super-admin/users/:id', superAdminController.deleteUser);
+    app.get('/super-admin/audit-logs', superAdminController.viewAuditLogs);
+    app.put('/super-admin/settings', superAdminController.updateSettings);
+    // app.post('/super-admin/backup', superAdminController.performBackup);
 
-app.post('/about', (req: Request ,res : Response)=>{
-    res.send("name: "+req.body.name);
-});
-routes(app);
+    // Admin CRM routes
+    app.post('/admin-crm/events/assign', auth, adminCRMController.assignEventToCRM);
+    app.put('/admin-crm/events/:eventId', auth, adminCRMController.editEvent);
+    app.delete('/admin-crm/events/:eventId', auth, adminCRMController.deleteEvent);
 
-db.then(()=>{
-    app.listen(port, ()=>{
-        console.log(`Server is running on port: ${port}`)
-    })
-}).catch((err)=> console.error(err));
+    // CRM routes
+    app.put('/crm/events/:eventId/progress', auth, crmController.updateEventProgress);
+    app.post('/crm/events/:eventId/report', auth, crmController.submitReport);
 
+    // General User and Event routes
+    app.post('/users', userService.createUser);  // Assuming general user creation doesn't require auth
+    app.put('/users/:id', auth, userService.updateUser);
+    app.delete('/users/:id', auth, userService.deleteUser);
+    app.get('/users/:email/events', auth, userService.getUserByEmail);
+    app.post('/login', userService.login);
 
-export default app;
+    app.post('/event/create', auth, eventService.createEvent);
+    app.get('/events/filter/date', auth, eventService.getEventsByDate);
+    app.get('/events/filter/location', auth, eventService.getEventsByLocation);
+    app.get('/events/filter/type', auth, eventService.getEventsByType);
+    app.put('/event/update/:event_id', auth, eventService.updateEvent);
+    app.delete('/event/delete/:id', auth, eventService.deleteEvent);
+    // app.post('/event/:event_id/subscribe', auth, eventService.subscribe);
+    app.get('/event/:event_id/attendees', auth, eventService.getAttendees);
+}
