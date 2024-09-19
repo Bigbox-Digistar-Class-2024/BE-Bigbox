@@ -1,0 +1,475 @@
+{
+	"info": {
+		"_postman_id": "42e4b7c6-6d49-4a0d-a36f-41dd45cd4a2e",
+		"name": "Taller 1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29285042",
+		"_collection_link": "https://warped-astronaut-583180.postman.co/workspace/Computaci%25C3%25B3nEnInternetIII~6efaa8c2-807e-4203-abe7-95981f15ea66/collection/28099080-42e4b7c6-6d49-4a0d-a36f-41dd45cd4a2e?action=share&source=collection_link&creator=29285042"
+	},
+	"item": [
+		{
+			"name": "Inscripción y Gestión de Entradas:",
+			"item": [
+				{
+					"name": "Inscribirse a un evento",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjVlZTU4ZTVjNTUxNDhjMzc2NTQ2NDAzIiwiZW1haWwiOiJDcmlzdGlhbkBtYWlsLmNvbSIsImlhdCI6MTcxMDEyODIwNSwiZXhwIjoxNzEwMTI4NTA1fQ.SdK8X1RdBBhSNJlCyoS78lveeTyVxZWUVQ2-yWk2-Cg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://event-management-nine.vercel.app/event/65ee5aea142e64f1dede22ef/subscribe",
+							"protocol": "https",
+							"host": [
+								"event-management-nine",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"event",
+								"65ee5aea142e64f1dede22ef",
+								"subscribe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Eventos Usuario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjVlZTU4ZTVjNTUxNDhjMzc2NTQ2NDAzIiwiZW1haWwiOiJDcmlzdGlhbkBtYWlsLmNvbSIsImlhdCI6MTcxMDEyODM0NCwiZXhwIjoxNzEwMTI4NjQ0fQ.4MvYzA8Y8SXSp9PHx6h6vFy9bcs6BKylnDJKefoWX2s",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://event-management-nine.vercel.app/users/Cristian@mail.com/events",
+							"protocol": "https",
+							"host": [
+								"event-management-nine",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"users",
+								"Cristian@mail.com",
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Participantes de un Evento",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjVlZTU4ZTVjNTUxNDhjMzc2NTQ2NDAzIiwiZW1haWwiOiJDcmlzdGlhbkBtYWlsLmNvbSIsImlhdCI6MTcxMDEyODM0NCwiZXhwIjoxNzEwMTI4NjQ0fQ.4MvYzA8Y8SXSp9PHx6h6vFy9bcs6BKylnDJKefoWX2s",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://event-management-nine.vercel.app/event/65ee7db87711f135571ab0c5/attendees",
+							"protocol": "https",
+							"host": [
+								"event-management-nine",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"event",
+								"65ee7db87711f135571ab0c5",
+								"attendees"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Registro y Autenticación de Usuarios",
+			"item": [
+				{
+					"name": "Crear usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" :\" crisian\",\r\n    \"email\":\"Cristian@mail.com\",\r\n    \"password\":\"Cristian\",\r\n    \"role\":\"organizer\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"Cristian@mail.com\",\r\n    \"password\":\"Cristian\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://event-management-nine.vercel.app/login",
+							"protocol": "https",
+							"host": [
+								"event-management-nine",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear organizador",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" :\"Juan\",\r\n    \"email\":\"juan@mail.com\",\r\n    \"password\":\"password\",\r\n    \"role\":\"organizer\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login organizador",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"juan@mail.com\",\r\n    \"password\" : \"pass\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Gestión de Eventos",
+			"item": [
+				{
+					"name": "Crear Evento",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjVlZTU4ZTVjNTUxNDhjMzc2NTQ2NDAzIiwiZW1haWwiOiJDcmlzdGlhbkBtYWlsLmNvbSIsImlhdCI6MTcxMDEyODU1NSwiZXhwIjoxNzEwMTI4ODU1fQ.irtK01V4UnIJcpUGN1T99ZcYP2QOgEjppHhEwz7Kxvk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Conferencia de Robótica Avanzada\",\r\n  \"description\": \"Una conferencia que explora los últimos avances en robótica y sus aplicaciones prácticas en la industria.\",\r\n  \"location\": \"Centro de Convenciones Metropolitano\",\r\n  \"date\": \"2024-05-15\",\r\n  \"type\": \"Tecnología\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://event-management-nine.vercel.app/event/create",
+							"protocol": "https",
+							"host": [
+								"event-management-nine",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"event",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filtrar por fecha",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/events/filter/date",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"events",
+								"filter",
+								"date"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filtrar por ubicacion",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjVlZTNiMjA3OGZiOTFkNDAwOWQ0NWVmIiwiZW1haWwiOiJCYWhhbW9uQG1haWwuY29tIiwiaWF0IjoxNzEwMTI4NzU5LCJleHAiOjE3MTAxMjkwNTl9.O5Tl5zYAQY2PVjafMBlqlcyp_98NfkobVWds8TcHKj8",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/events/filter/location?location=Universidad Nacional",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"",
+								"events",
+								"filter",
+								"location"
+							],
+							"query": [
+								{
+									"key": "location",
+									"value": "Universidad Nacional"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filtrar por tipo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/events/filter/type?type=Ética",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"events",
+								"filter",
+								"type"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "Ética"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Evento 2",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Foro de Tecnología\",\r\n  \"description\": \"Un foro sobre los avances tecnológicos más recientes.\",\r\n  \"date\": \"2024-03-15T08:00:00.000Z\",\r\n  \"location\": \"Centro de Convenciones\",\r\n  \"type\": \"Tecnología\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/event/create",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"event",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar evento",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjVlZThiZjQ5NjM5ZDg2YmU3Y2RjNmUwIiwiZW1haWwiOiJqdWFuQG1haWwuY29tIiwiaWF0IjoxNzEwMTMyMjIwLCJleHAiOjE3MTAxMzI1MjB9.OgAds086wA3abR2PFdgHcRJr3vgbg5ax-wuqnPDYPVE",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Foro de Algo y más\",\r\n  \"description\": \"Una conferencia sobre los avances de algo más recientes.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/event/update/65ee8c389639d86be7cdc6e5",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"event",
+								"update",
+								"65ee8c389639d86be7cdc6e5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mostrar eventos de un organizador",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjVlZThiZjQ5NjM5ZDg2YmU3Y2RjNmUwIiwiZW1haWwiOiJqdWFuQG1haWwuY29tIiwiaWF0IjoxNzEwMTMyMjIwLCJleHAiOjE3MTAxMzI1MjB9.OgAds086wA3abR2PFdgHcRJr3vgbg5ax-wuqnPDYPVE",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:3000/users/juan@mail.com/events",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"juan@mail.com",
+								"events"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "https://event-management-nine.vercel.app/"
+		}
+	]
+}
