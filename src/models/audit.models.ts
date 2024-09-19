@@ -1,4 +1,3 @@
-// src/models/AuditLog.ts
 import mongoose, { Document } from 'mongoose';
 
 export interface AuditLogInput {
