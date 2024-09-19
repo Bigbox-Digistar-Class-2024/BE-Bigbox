@@ -34,4 +34,13 @@ export class EventService {
     async getAttendees(eventId: string): Promise<EventDocument | null> {
         return Event.findById(eventId).populate('participants');
     }
+
+    async getEventsByLocation (location: string): Promise<EventDocument[]> {
+        return Event.find({ location });
+    } 
+
+    async getEventsByType (type: string): Promise<EventDocument[]> {
+        return Event.find({ type });
+    }
+    
 }
