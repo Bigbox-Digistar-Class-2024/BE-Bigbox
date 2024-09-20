@@ -1,5 +1,3 @@
-// src/services/SettingsService.ts
-
 import Settings from "../models/setting.models";
 
 export class SettingsService {

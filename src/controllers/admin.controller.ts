@@ -1,4 +1,3 @@
-// src/controllers/AdminCRMController.ts
 import { Request, Response } from 'express';
 import { UserService } from '../services/user.service';
 import { EventService } from '../services/event.service';

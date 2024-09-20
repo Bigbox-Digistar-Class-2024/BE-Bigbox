@@ -1,10 +1,14 @@
 // src/routes/index.ts
 import { Express } from "express";
-import { UserService, AuditLogService, SettingsService, EventService } from "../services";
 import auth from "../middlewares/auth";
 import { SuperAdminController } from "../controllers/superadmin.controller";
 import { AdminCRMController } from "../controllers/admin.controller";
 import { CRMController } from "../controllers/crm.controller";
+import { UserService } from "../services/user.service";
+import { AuditLogService } from "../services/audit.service";
+import { SettingsService } from "../services/settings.service";
+import { EventService } from "../services/event.service";
+import userController from "../controllers/user.controller";
 
 export default function setupRoutes(app: Express) {
     const userService = new UserService();
@@ -34,11 +38,11 @@ export default function setupRoutes(app: Express) {
     app.post('/crm/events/:eventId/report', auth, crmController.submitReport);
 
     // General User and Event routes
-    app.post('/users', userService.createUser);  // Assuming general user creation doesn't require auth
-    app.put('/users/:id', auth, userService.updateById);
-    app.delete('/users/:id', auth, userService.delete);
-    app.get('/users/:email/events', auth, userService.getEventsByUser);
-    app.post('/login', userService.login);
+    app.post('/users', userController.create);  // Assuming general user creation doesn't require auth
+    app.put('/users/:id', auth, userController.updateById);
+    app.delete('/users/:id', auth, userController.delete);
+    app.get('/users/:email/events', auth, userController.getEventsByUser);
+    app.post('/login', auth, userController.login);
 
     app.post('/event/create', auth, eventService.createEvent);
     app.get('/events/filter/date', auth, eventService.getEventsByDate);
@@ -46,6 +50,6 @@ export default function setupRoutes(app: Express) {
     app.get('/events/filter/type', auth, eventService.getEventsByType);
     app.put('/event/update/:event_id', auth, eventService.updateEvent);
     app.delete('/event/delete/:id', auth, eventService.deleteEvent);
-    app.post('/event/:event_id/subscribe', auth, eventService.subscribe);
+    // app.post('/event/:event_id/subscribe', auth, eventService.subscribe);
     app.get('/event/:event_id/attendees', auth, eventService.getAttendees);
 }

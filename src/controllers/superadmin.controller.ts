@@ -1,4 +1,3 @@
-// src/controllers/SuperAdminController.ts
 import { Request, Response } from 'express';
 import { UserService } from '../services/user.service';
 import { AuditLogService } from '../services/audit.service';
